@@ -43,7 +43,6 @@ export class AppComponent implements OnInit {
       }
     });
 
-    this.store.subscribe(state => console.log('store value', state));
 
     this.isLoggedIn$ = this.store
       .pipe(
