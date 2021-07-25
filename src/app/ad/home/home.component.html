@@ -1,0 +1,11 @@
+<!--<ng-container *ngFor="let category of (categories$ | async)">-->
+<!--  <p>{{ category.nome}}</p>-->
+<!--</ng-container>-->
+
+<mat-grid-list *ngIf="categories !== undefined && categories.length > 0"
+               cols="6"
+               rowHeight="2:1">
+  <mat-grid-tile *ngFor="let category of categories" class="grid-fit">
+    <div>{{ category.nome}}</div>
+  </mat-grid-tile>
+</mat-grid-list>

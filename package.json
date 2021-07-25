@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve  --proxy-config ./proxy.json",
+    "start": "ng serve",
     "server": "ts-node -P ./server/server.tsconfig.json ./server/server.ts",
     "build": "ng build",
     "test": "ng test",
@@ -34,6 +34,7 @@
     "body-parser": "^1.18.2",
     "core-js": "^2.4.1",
     "express": "^4.16.2",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.22.2",
     "rxjs": "^6.5.4",
     "tslib": "^2.0.0",

@@ -3,6 +3,7 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {AuthActions} from './action-types';
 import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {login} from './auth.actions';
 
 // a cosa serve un Effects:
 // dunque un azione viene dispatchrd , il reducer viene triggered e poi vogliamo un side effect che è quello di salvare l'user nella
@@ -15,8 +16,11 @@ export class AuthEffects {
       this.actions$
         .pipe(
           ofType(AuthActions.login),
-          tap(action => localStorage.setItem('user',
-            JSON.stringify(action.user))
+          tap(action => {
+              localStorage.setItem('user',
+                JSON.stringify(action.user));
+              localStorage.setItem('token', action.token);
+            }
           )
         )
     ,
@@ -28,6 +32,7 @@ export class AuthEffects {
           ofType(AuthActions.logout),
           tap(action => {
             localStorage.removeItem('user');
+            localStorage.removeItem('token');
             this.router.navigateByUrl('/login');
           })
         )

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-
+import jwt_decode from 'jwt-decode';
 import {Store} from '@ngrx/store';
 
 import {AuthService} from '../auth.service';
@@ -9,6 +9,8 @@ import {noop} from 'rxjs';
 import {Router} from '@angular/router';
 import {AuthState} from '../reducers';
 import {login} from '../auth.actions';
+import {TokenDecodedInfo} from '../model/TokenDecodedInfo';
+import {UserInfo} from '../model/UserInfo';
 
 @Component({
   selector: 'login',
@@ -26,8 +28,8 @@ export class LoginComponent implements OnInit {
     private store: Store<AuthState>) {
 
     this.form = fb.group({
-      email: ['test@angular-university.io', [Validators.required]],
-      password: ['test', [Validators.required]]
+      email: ['enrico.gigante@gmail.com', [Validators.required]],
+      password: ['asdasd', [Validators.required]]
     });
 
   }
@@ -42,11 +44,14 @@ export class LoginComponent implements OnInit {
 
     this.auth.login(val.email, val.password)
       .pipe(
-        tap(user => {
+        tap(data => {
+          const token = data.headers.get('Authorization');
+          const userTokenInfo: TokenDecodedInfo = jwt_decode(token);
 
-          this.store.dispatch(login({user: user}));
+          const userInfo: UserInfo = {firstName: userTokenInfo.firstName, lastName: userTokenInfo.lastName};
+          this.store.dispatch(login({user: userInfo, token: token}));
 
-          this.router.navigateByUrl('/courses');
+          this.router.navigateByUrl('/ad');
 
         })
       )

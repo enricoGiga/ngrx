@@ -5,10 +5,12 @@ import {AuthActions} from '../action-types';
 
 export interface AuthState {
   user: User;
+  token: string;
 }
 
 export const initialAuthState: AuthState = {
-  user: undefined
+  user: undefined,
+  token: undefined
 };
 
 export const authReducer = createReducer(
@@ -16,13 +18,15 @@ export const authReducer = createReducer(
 
   on(AuthActions.login, (state, action) => {
     return {
-      user: action.user
+      user: action.user,
+      token: action.token
     };
   }),
 
   on(AuthActions.logout, (state, action) => {
     return {
-      user: undefined
+      user: undefined,
+      token: undefined
     };
   })
 );
