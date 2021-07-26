@@ -6,7 +6,8 @@ import {Category, EventE} from '../model/Category';
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [AdService]
 })
 export class HomeComponent implements OnInit {
   categories: Category[] = [];
@@ -18,9 +19,16 @@ export class HomeComponent implements OnInit {
   event$: Observable<EventE>;
 
   ngOnInit(): void {
-    this.adHttpService.fetchTest().subscribe(value => console.log(value));
+    // this.adHttpService.getAllCategories()
+    //   .subscribe(value => {
+    //     console.log(value);
+    //     this.categories = value;
+    //   });
+    this.adHttpService.fetchTest().subscribe(value => {
+      console.log(value);
+    });
     // this.event$ = this.adHttpService.findEvent();
-    //this.loadCategories();
+    this.loadCategories();
   }
 
   private loadCategories(): void {

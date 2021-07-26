@@ -5,8 +5,8 @@ export const REFRESH_TOKEN_URL = API_URL + 'refreshToken';
 
 
 export const MUSEEK_BASE_URL = BASE_URL + 'museek/';
-export const CATEGORIE_URL = MUSEEK_BASE_URL + 'functional/categorie/';
-export const CATEGORIE_STREAM_URL = MUSEEK_BASE_URL + 'functional/stream/categorie/';
+export const STREAM_CATEGORIE_URL = MUSEEK_BASE_URL + 'stream/categorie/';
+export const STEREAM_TAILABLE_CATEGORIE_URL = MUSEEK_BASE_URL + 'stream/tailable/categorie/';
 
 
 export const TEST = MUSEEK_BASE_URL + 'test';

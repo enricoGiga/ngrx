@@ -13,7 +13,7 @@ import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 
 import {AuthService} from '../auth/auth.service';
-import {REFRESH_TOKEN_URL} from './constants';
+import {REFRESH_TOKEN_URL} from './http-constants';
 import {TokenDecodedInfo} from '../auth/model/TokenDecodedInfo';
 import jwt_decode from 'jwt-decode';
 import {UserInfo} from '../auth/model/UserInfo';

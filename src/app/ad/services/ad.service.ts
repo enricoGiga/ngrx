@@ -1,39 +1,53 @@
 import {Injectable, NgZone} from '@angular/core';
 
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Category, EventE} from '../model/Category';
-import {take} from 'rxjs/operators';
+import {Category} from '../model/Category';
 import {HttpClient} from '@angular/common/http';
-import {BASE_URL, CATEGORIE_URL, CATEGORIE_STREAM_URL, TEST} from '../../services/constants';
+import {STEREAM_TAILABLE_CATEGORIE_URL, STREAM_CATEGORIE_URL, TEST} from '../../services/http-constants';
 
+// import 'node_modules/event-source-polyfill/src/eventsource.min.js';
+
+// declare var EventSourcePolyfill: any;
 @Injectable()
 export class AdService {
   private categoryWatchSource = new BehaviorSubject<Category>(null);
   _categoryWatchSource: Observable<Category> = this.categoryWatchSource.asObservable();
+
+
+  allCategory: Category[] = [];
+  private allCategoryWatchSource = new BehaviorSubject<Category[]>(null);
+  _allCategories: Observable<Category[]> = this.allCategoryWatchSource.asObservable();
+
   constructor(private http: HttpClient, private zone: NgZone) {
-    // this.getTeamsStream().subscribe(category => {
-    //     this.categoryWatchSource.next(category);
-    //   }, error => console.log('Error: ' + error),
-    //   () => console.log('done loading team stream'));
+    const subscription = this.getCategoriesStream().subscribe(category => {
+        this.categoryWatchSource.next(category);
+        // this.allCategory.push(category);
+      }, error => console.log('Error: ' + error),
+      () => {
+
+        // this.allCategoryWatchSource.next(this.allCategory);
+        console.log('done loading team stream');
+        subscription.unsubscribe();
+      });
   }
 
 
+  getAllCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(STREAM_CATEGORIE_URL);
+  }
 
   fetchTest(): Observable<Category[]> {
-    return this.http.get<Category[]>(TEST );
-  }
-
-  findEvent(): Observable<EventE> {
-    return this.http.get<EventE>(CATEGORIE_STREAM_URL + '60f816b66059d3138b0d6e33/events');
+    return this.http.get<Category[]>(TEST);
   }
 
   /**
-   * Subscribe to the teams update Server Sent Event stream
+   * Subscribe to the categories update Server Sent Event stream
    */
-  getTeamsStream(): Observable<Category> {
+  getCategoriesStream(): Observable<Category> {
     return new Observable((observer) => {
+      const token = localStorage.getItem('token');
+      const eventSource = new EventSource(STEREAM_TAILABLE_CATEGORIE_URL);
 
-      const eventSource = new EventSource(CATEGORIE_STREAM_URL);
 
       eventSource.onmessage = (event) => {
         const json = JSON.parse(event.data);

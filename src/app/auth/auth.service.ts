@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {LOGIN_URL, REFRESH_TOKEN_URL} from '../services/constants';
+import {LOGIN_URL, REFRESH_TOKEN_URL} from '../services/http-constants';
 
 
 @Injectable()
@@ -26,7 +26,7 @@ export class AuthService {
       isRefreshToken: 'true'
     });
 
-    return this.http.post(REFRESH_TOKEN_URL, {}, {
+    return this.http.get(REFRESH_TOKEN_URL, {
       headers: headers
     });
 

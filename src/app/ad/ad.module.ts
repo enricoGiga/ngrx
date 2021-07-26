@@ -36,10 +36,7 @@ export const adRoutes: Routes = [
 export class AdModule {
   static forRoot(): ModuleWithProviders<AdModule> {
     return {
-      ngModule: AdModule,
-      providers: [
-        AdService
-      ]
+      ngModule: AdModule
     };
   }
 }
