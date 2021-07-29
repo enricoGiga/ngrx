@@ -1,45 +1,50 @@
 import {Component, OnInit} from '@angular/core';
-import {AdService} from '../services/ad.service';
+import {AdReactiveService} from '../services/ad-reactive.service';
 import {noop, Observable} from 'rxjs';
-import {Category, EventE} from '../model/Category';
+import {Brand} from '../model/Brand';
+import {PrimeNGConfig} from 'primeng/api';
+import {AdService} from '../services/ad.service';
+
 
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [AdService]
+  providers: [AdReactiveService]
 })
 export class HomeComponent implements OnInit {
-  categories: Category[] = [];
+  brands: Brand[] = [];
+  selectedBrand: Brand;
 
-  constructor(private adHttpService: AdService) {
+  brands$: Observable<Brand[]>;
+  constructor(
+    // private adReactiveService: AdReactiveService,
+              private primengConfig: PrimeNGConfig,
+              private adService: AdService) {
+    // this.loadBrandReactiveWay();
+
   }
 
-  categories$: Observable<Category[]>;
-  event$: Observable<EventE>;
 
   ngOnInit(): void {
-    // this.adHttpService.getAllCategories()
-    //   .subscribe(value => {
-    //     console.log(value);
-    //     this.categories = value;
-    //   });
-    this.adHttpService.fetchTest().subscribe(value => {
-      console.log(value);
-    });
-    // this.event$ = this.adHttpService.findEvent();
-    this.loadCategories();
+    this.brands$ = this.loadBrands();
+    this.primengConfig.ripple = true;
+
   }
 
-  private loadCategories(): void {
+  // private loadBrandReactiveWay(): void {
+  //
+  //   // subscribe to initial set of teams
+  //   this.adReactiveService._brandWatchSource.subscribe(value => {
+  //     if (value !== undefined && value !== null) {
+  //       this.brands.push(value);
+  //     }
+  //   });
+  //
+  //
+  // }
 
-    // subscribe to initial set of teams
-    this.adHttpService._categoryWatchSource.subscribe(value => {
-      if (value !== undefined && value !== null) {
-        this.categories.push(value);
-      }
-    });
-
-
+  private loadBrands() {
+    return this.adService.fetchBrands();
   }
 }

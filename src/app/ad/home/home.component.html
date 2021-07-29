@@ -1,11 +1,29 @@
-<!--<ng-container *ngFor="let category of (categories$ | async)">-->
-<!--  <p>{{ category.nome}}</p>-->
+<!--<h5>Advanced with Templating, Filtering and Multiple Selection</h5>-->
+<!--<p-listbox [options]="brands" [(ngModel)]="selectedBrand" [metaKeySelection]="false"-->
+<!--           [filter]="true"  optionLabel="id" [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}" >-->
+<!--  <ng-template let-brand pTemplate="item">-->
+<!--    <div class="country-item">-->
+<!--      <div>{{brand.id}}</div>-->
+<!--    </div>-->
+<!--  </ng-template>-->
+<!--</p-listbox>-->
+
+
+<!--<ng-container *ngFor="let category of brands">-->
+<!--  <p>{{ category.id}}</p>-->
 <!--</ng-container>-->
 
-<mat-grid-list *ngIf="categories !== undefined && categories.length > 0"
-               cols="6"
-               rowHeight="2:1">
-  <mat-grid-tile *ngFor="let category of categories" class="grid-fit">
-    <div>{{ category.nome}}</div>
-  </mat-grid-tile>
-</mat-grid-list>
+
+
+
+<!--<ng-container *ngFor="let brand of (brands$ | async)">-->
+<!--  <p>{{ brand.id}}</p>-->
+<!--</ng-container>-->
+<p-listbox [options]="(brands$ | async)" [(ngModel)]="selectedBrand" [metaKeySelection]="false"
+           [filter]="true"  optionLabel="id" [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}" >
+  <ng-template let-brand pTemplate="item">
+    <div class="country-item">
+      <div>{{brand.id}}</div>
+    </div>
+  </ng-template>
+</p-listbox>
