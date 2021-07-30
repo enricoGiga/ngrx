@@ -2,7 +2,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 
-
+@import "~@ng-select/ng-select/themes/default.theme.css";
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
 
 // Include non-theme styles for core.
 @include mat.core();
@@ -62,3 +64,5 @@ $theme: mat.define-light-theme($primary, $accent);
   opacity: 0.5;
   justify-content: center;
 }
+
+

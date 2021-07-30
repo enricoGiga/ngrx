@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {AdReactiveService} from '../services/ad-reactive.service';
-import {noop, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Brand} from '../model/Brand';
-import {PrimeNGConfig} from 'primeng/api';
 import {AdService} from '../services/ad.service';
+import {Allocation} from '../model/Allocation';
+import {Category} from '../model/Category';
 
 
 @Component({
@@ -13,22 +14,28 @@ import {AdService} from '../services/ad.service';
   providers: [AdReactiveService]
 })
 export class HomeComponent implements OnInit {
-  brands: Brand[] = [];
-  selectedBrand: Brand;
-
+  // brands: Brand[] = [];
   brands$: Observable<Brand[]>;
+  selectedBrand: string;
+
+  allocations$: Observable<Allocation[]>;
+  categories: Category[];
+
+  selectedCategory: string;
+
+
   constructor(
     // private adReactiveService: AdReactiveService,
-              private primengConfig: PrimeNGConfig,
-              private adService: AdService) {
+
+    private adService: AdService) {
     // this.loadBrandReactiveWay();
 
   }
 
-
   ngOnInit(): void {
-    this.brands$ = this.loadBrands();
-    this.primengConfig.ripple = true;
+    this.brands$ = this.adService.fetchBrands();
+    this.allocations$ = this.adService.fetchAllocations();
+
 
   }
 
@@ -44,7 +51,8 @@ export class HomeComponent implements OnInit {
   //
   // }
 
-  private loadBrands() {
-    return this.adService.fetchBrands();
+
+  setSelectedCategoty(categories: Category[]) {
+    this.categories = {...categories};
   }
 }

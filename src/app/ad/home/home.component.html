@@ -1,29 +1,47 @@
-<!--<h5>Advanced with Templating, Filtering and Multiple Selection</h5>-->
-<!--<p-listbox [options]="brands" [(ngModel)]="selectedBrand" [metaKeySelection]="false"-->
-<!--           [filter]="true"  optionLabel="id" [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}" >-->
-<!--  <ng-template let-brand pTemplate="item">-->
-<!--    <div class="country-item">-->
-<!--      <div>{{brand.id}}</div>-->
-<!--    </div>-->
-<!--  </ng-template>-->
-<!--</p-listbox>-->
+<div class="container-fluid">
+  <div class="row align-items-start">
 
 
-<!--<ng-container *ngFor="let category of brands">-->
-<!--  <p>{{ category.id}}</p>-->
-<!--</ng-container>-->
-
-
-
-
-<!--<ng-container *ngFor="let brand of (brands$ | async)">-->
-<!--  <p>{{ brand.id}}</p>-->
-<!--</ng-container>-->
-<p-listbox [options]="(brands$ | async)" [(ngModel)]="selectedBrand" [metaKeySelection]="false"
-           [filter]="true"  optionLabel="id" [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}" >
-  <ng-template let-brand pTemplate="item">
-    <div class="country-item">
-      <div>{{brand.id}}</div>
+    <div class="col">
+      <ng-select
+        placeholder="Reparto"
+        class="custom"
+        [items]="(allocations$ | async)"
+        bindLabel="id"
+        bindValue="categories"
+        [(ngModel)]="categories"
+        (change)="NgSelectCategories.handleClearClick()">
+      </ng-select>
     </div>
-  </ng-template>
-</p-listbox>
+
+    <div class="col">
+      <ng-select
+        placeholder="Categoria"
+        #NgSelectCategories [items]="categories"
+        bindLabel="name"
+        bindValue="name"
+        [(ngModel)]="selectedCategory">
+      </ng-select>
+    </div>
+
+    <div class="col">
+      <ng-select [items]="(brands$ | async)"
+                 placeholder="Marca"
+                 bindLabel="id"
+                 bindValue="id"
+                 [(ngModel)]="selectedBrand">
+      </ng-select>
+    </div>
+    <div class="col">
+      <label for="exampleFormControlInput1" class="form-label">Modello</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="modello">
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+

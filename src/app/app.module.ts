@@ -25,6 +25,7 @@ import {reducers, metaReducers} from './reducers';
 import {AuthGuard} from './auth/auth.guard';
 import TokenInterceptor from './services/token.interceptor';
 import {AdModule} from './ad/ad.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 const routes: Routes = [
@@ -72,7 +73,8 @@ const routes: Routes = [
       }
     }),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    NgbModule
   ],
   bootstrap: [AppComponent],
   providers: [

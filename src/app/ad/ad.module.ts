@@ -4,15 +4,9 @@ import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {AuthService} from '../auth/auth.service';
-import {AdReactiveService} from './services/ad-reactive.service';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import TokenInterceptor from '../services/token.interceptor';
-import {ListboxModule} from 'primeng/listbox';
+
 import {FormsModule} from '@angular/forms';
-
-
-
+import {NgSelectModule} from '@ng-select/ng-select';
 
 
 export const adRoutes: Routes = [
@@ -31,8 +25,8 @@ export const adRoutes: Routes = [
     RouterModule.forChild(adRoutes),
     CommonModule,
     MatGridListModule,
-    ListboxModule,
     FormsModule,
+    NgSelectModule,
   ],
   exports: [HomeComponent]
 
