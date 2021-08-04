@@ -9,7 +9,7 @@ export const selectAuthState =
 // memorized function, viene eseguita solo se lo stato cambia rispetto allo stato precedente, quindi ottimizza rispetto al commit precedente
 export const isLoggedIn = createSelector(
   selectAuthState,
-  auth => getUser(auth)
+  auth => !calculateIfTokenExpired(auth)
 );
 
 
@@ -18,10 +18,16 @@ export const isLoggedOut = createSelector(
   loggedIn => !loggedIn
 );
 
-export function getUser(auth: AuthState): boolean {
+export function calculateIfTokenExpired(auth: AuthState): boolean {
   if (!!auth.token) {
-    return true;
+    return isTokenExpired(auth.token);
   } else {
-    return localStorage.getItem('token') !== null;
+    const token = localStorage.getItem('token');
+      return !!token ? isTokenExpired(token) : false;
   }
+}
+
+export function isTokenExpired(token: string) {
+  const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+  return (Math.floor((new Date).getTime() / 1000)) >= expiry;
 }

@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-this.store.dispatch(logout());
+    this.store.dispatch(logout());
   }
 
 }

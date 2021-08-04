@@ -7,6 +7,12 @@ import {MatGridListModule} from '@angular/material/grid-list';
 
 import {FormsModule} from '@angular/forms';
 import {NgSelectModule} from '@ng-select/ng-select';
+import {NgOptionHighlightModule} from '@ng-select/ng-option-highlight';
+import { SearchAdComponent } from './search-ad/search-ad.component';
+import { CreateAdSecondStepComponent } from './create-ad/create-ad-second-step/create-ad-second-step.component';
+import { CreateAdThirdStepComponent } from './create-ad/create-ad-third-step/create-ad-third-step.component';
+import { MyAdDashboardComponent } from './my-ad-dashboard/my-ad-dashboard.component';
+
 
 
 export const adRoutes: Routes = [
@@ -19,7 +25,12 @@ export const adRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    SearchAdComponent,
+    CreateAdSecondStepComponent,
+    CreateAdThirdStepComponent,
+    MyAdDashboardComponent,
+
   ],
   imports: [
     RouterModule.forChild(adRoutes),
@@ -27,6 +38,7 @@ export const adRoutes: Routes = [
     MatGridListModule,
     FormsModule,
     NgSelectModule,
+    NgOptionHighlightModule
   ],
   exports: [HomeComponent]
 

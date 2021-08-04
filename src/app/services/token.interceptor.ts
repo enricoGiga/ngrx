@@ -17,7 +17,7 @@ import {REFRESH_TOKEN_URL} from './http-constants';
 import {TokenDecodedInfo} from '../auth/model/TokenDecodedInfo';
 import jwt_decode from 'jwt-decode';
 import {UserInfo} from '../auth/model/UserInfo';
-import {login, logout} from '../auth/auth.actions';
+import {login, logout, tokenExpired} from '../auth/auth.actions';
 import {Store} from '@ngrx/store';
 import {AuthState} from '../auth/reducers';
 import {Router} from '@angular/router';
@@ -45,7 +45,7 @@ export default class TokenInterceptor implements HttpInterceptor {
         if (err instanceof HttpErrorResponse) {
 
           if (err.status === 403) {
-            this.store.dispatch(logout());
+            this.store.dispatch(tokenExpired());
             // const headers = new HttpHeaders({
             //   Authorization: token,
             //   isRefreshToken: 'true'

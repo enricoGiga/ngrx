@@ -7,9 +7,7 @@ import {
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
 
-export interface AppState {
-
-}
+export interface AppState {}
 export function logger(reducer: ActionReducer<any>)
   : ActionReducer<any> {
   return (state, action) => {

@@ -5,6 +5,7 @@ import {select, Store} from '@ngrx/store';
 import {tap} from 'rxjs/operators';
 import {isLoggedIn} from './auth.selectors';
 import {AppState} from '../reducers';
+import {tokenExpired} from './auth.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class AuthGuard implements CanActivate {
         select(isLoggedIn),
         tap(loggedIn => {
           if (!loggedIn) {
-            this.router.navigateByUrl('/login');
+            this.store.dispatch(tokenExpired());
           }
         })
       );

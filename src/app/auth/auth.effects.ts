@@ -29,7 +29,7 @@ export class AuthEffects {
   logout$ = createEffect(() =>
       this.actions$
         .pipe(
-          ofType(AuthActions.logout),
+          ofType(AuthActions.logout, AuthActions.tokenExpired),
           tap(action => {
             localStorage.removeItem('user');
             localStorage.removeItem('token');
