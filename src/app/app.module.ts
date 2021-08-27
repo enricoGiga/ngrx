@@ -29,11 +29,12 @@ import TokenInterceptor from './services/token.interceptor';
 
 
 const routes: Routes = [
-  {
-    path: 'courses',
-    loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule),
-    canActivate: [AuthGuard]
-  },
+  // {
+  //   path: 'courses',
+  //   loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule),
+  //   canActivate: [AuthGuard]
+  // },
+
   {
     path: 'ad',
     loadChildren: () => import('./ad/ad.module').then(m => m.AdModule),

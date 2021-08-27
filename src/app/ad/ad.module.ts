@@ -5,14 +5,14 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {NgOptionHighlightModule} from '@ng-select/ng-option-highlight';
-import { SearchAdComponent } from './search-ad/search-ad.component';
-import { CreateAdSecondStepComponent } from './create-ad/create-ad-second-step/create-ad-second-step.component';
-import { CreateAdThirdStepComponent } from './create-ad/create-ad-third-step/create-ad-third-step.component';
-import { MyAdDashboardComponent } from './my-ad-dashboard/my-ad-dashboard.component';
-
+import {SearchAdComponent} from './search-ad/search-ad.component';
+import {CreateAdSecondStepComponent} from './create-ad/create-ad-second-step/create-ad-second-step.component';
+import {CreateAdThirdStepComponent} from './create-ad/create-ad-third-step/create-ad-third-step.component';
+import {MyAdDashboardComponent} from './my-ad-dashboard/my-ad-dashboard.component';
+import {CreateAdFirstStepComponent} from './create-ad/create-ad-first-step/create-ad-first-step.component';
 
 
 export const adRoutes: Routes = [
@@ -20,6 +20,18 @@ export const adRoutes: Routes = [
     path: '',
     component: HomeComponent
 
+  },
+  {
+    path: 'firstStep',
+    component: CreateAdFirstStepComponent
+  },
+  {
+    path: 'secondStep',
+    component: CreateAdSecondStepComponent
+  },
+  {
+    path: 'thirdStep',
+    component: CreateAdThirdStepComponent
   }
 ];
 
@@ -27,6 +39,7 @@ export const adRoutes: Routes = [
   declarations: [
     HomeComponent,
     SearchAdComponent,
+    CreateAdFirstStepComponent,
     CreateAdSecondStepComponent,
     CreateAdThirdStepComponent,
     MyAdDashboardComponent,
@@ -37,6 +50,7 @@ export const adRoutes: Routes = [
     CommonModule,
     MatGridListModule,
     FormsModule,
+    ReactiveFormsModule,
     NgSelectModule,
     NgOptionHighlightModule
   ],

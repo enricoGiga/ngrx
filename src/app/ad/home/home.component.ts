@@ -5,6 +5,9 @@ import {Brand} from '../model/Brand';
 import {AdService} from '../services/ad.service';
 import {Allocation} from '../model/Allocation';
 import {Category} from '../model/Category';
+import {FormBuilder, Validators} from '@angular/forms';
+import {tap} from 'rxjs/operators';
+import {NgSelectComponent} from '@ng-select/ng-select';
 
 
 @Component({
@@ -22,11 +25,25 @@ export class HomeComponent implements OnInit {
   categories: Category[];
 
   selectedCategory: string;
-
+  form = this.fb.group({
+    reparto: ['', {
+      validators: [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(60)
+      ],
+      updateOn: 'blur'
+    }],
+    category: ['', Validators.required],
+    marca: [''],
+    modello: [''],
+    titoloAnnuncio: [''],
+    testoAnnuncio: ['']
+  });
 
   constructor(
     // private adReactiveService: AdReactiveService,
-
+    private fb: FormBuilder,
     private adService: AdService) {
     // this.loadBrandReactiveWay();
 
@@ -34,25 +51,20 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.brands$ = this.adService.fetchBrands();
-    this.allocations$ = this.adService.fetchAllocations();
+    this.allocations$ = this.adService.fetchAllocations().pipe(tap(console.log));
 
 
   }
 
-  // private loadBrandReactiveWay(): void {
-  //
-  //   // subscribe to initial set of teams
-  //   this.adReactiveService._brandWatchSource.subscribe(value => {
-  //     if (value !== undefined && value !== null) {
-  //       this.brands.push(value);
-  //     }
-  //   });
-  //
-  //
-  // }
 
+  patchValue(NgSelectCategories: NgSelectComponent, $event: Allocation) {
+    this.categories = $event.categories;
+    // this.form.get('categories').setValue( $event.categories);
+    console.log(this.form.value);
+    NgSelectCategories.handleClearClick();
+  }
 
-  setSelectedCategoty(categories: Category[]) {
-    this.categories = {...categories};
+  print() {
+    console.log(this.form.value);
   }
 }

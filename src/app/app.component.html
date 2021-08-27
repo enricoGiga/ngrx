@@ -3,9 +3,9 @@
     <mat-sidenav #start>
         <mat-nav-list (click)="start.close()">
 
-            <a mat-list-item routerLink="/courses">
+            <a mat-list-item routerLink="/ad">
                 <mat-icon>library_books</mat-icon>
-                <span>Courses</span>
+                <span>Create Ad</span>
             </a>
 
             <a mat-list-item routerLink="/login" *ngIf="isLoggedOut$ | async">
