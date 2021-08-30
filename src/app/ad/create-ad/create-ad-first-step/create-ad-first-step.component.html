@@ -1,1 +1,85 @@
-<p>create-ad-first-step works!</p>
+<div class="container">
+
+  <div [formGroup]="form">
+
+    <div class="row mb-2">
+      <div class="col-2 text-right"><label class="form-label"><b>Reparto</b></label></div>
+      <div class="col-10">
+        <ng-select
+          #select
+          placeholder="Reparto"
+          class="custom"
+          [items]="(allocations$ | async)"
+          bindLabel="id"
+          bindValue="id"
+          labelForId="reparto"
+          formControlName="reparto"
+          [dropdownPosition]="'bottom'"
+          (change)="patchValue(NgSelectCategories, $event)"
+        >
+        </ng-select>
+      </div>
+    </div>
+
+
+    <div class="row mb-2">
+      <div class="col-2 text-right"><label class="form-label"><b>Categoria</b></label></div>
+      <div class="col-10">
+        <ng-select
+          placeholder="Categoria"
+          formControlName="category"
+          #NgSelectCategories
+          bindLabel="name"
+          bindValue="name"
+          [items]="categories"
+          [dropdownPosition]="'bottom'"
+        >
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+
+      <div class="col-2 text-right"><label class="form-label"><b>Marca</b></label></div>
+      <div class="col-10">
+        <ng-select [items]="(brands$ | async)"
+                   [dropdownPosition]="'bottom'"
+                   placeholder="Marca"
+                   bindLabel="id"
+                   bindValue="id"
+                   formControlName="marca"
+        >
+        </ng-select>
+      </div>
+    </div>
+
+
+    <div class="row mb-2">
+
+      <div class="col-2 text-right"><label class="form-label"><b>Modello</b></label></div>
+      <div class="col-10">
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Modello"
+               formControlName="modello">
+      </div>
+
+    </div>
+    <div class="row mb-2">
+      <div class="col-2 text-right"><label for="exampleFormControlTextarea2" class="form-label"><b>Titolo
+        annuncio</b></label></div>
+      <div class="col-10">
+        <input type="text" class="form-control" id="exampleFormControlTextarea2"
+               placeholder="Titolo annuncio" formControlName="titolo"></div>
+    </div>
+    <div class="row">
+      <div class="col-2 text-right"><label for="exampleFormControlTextarea1" class="form-label"><b>Testo
+        annuncio</b></label></div>
+      <div class="col-10">
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                  placeholder="Testo annuncio" formControlName="descrizione"></textarea></div>
+    </div>
+
+  </div>
+
+
+</div>
+

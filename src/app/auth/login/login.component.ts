@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
           const userInfo: UserInfo = {firstName: userTokenInfo.firstName, lastName: userTokenInfo.lastName};
           this.store.dispatch(login({user: userInfo, token: token}));
 
-          this.router.navigateByUrl('/ad');
+          this.router.navigateByUrl('/ad/home');
 
         })
       )

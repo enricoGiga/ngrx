@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'create-ad-third-step',
@@ -6,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-ad-third-step.component.css']
 })
 export class CreateAdThirdStepComponent implements OnInit {
-
-  constructor() { }
+  form = this.fb.group({});
+  constructor(    private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }

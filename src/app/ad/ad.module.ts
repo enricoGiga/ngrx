@@ -13,26 +13,21 @@ import {CreateAdSecondStepComponent} from './create-ad/create-ad-second-step/cre
 import {CreateAdThirdStepComponent} from './create-ad/create-ad-third-step/create-ad-third-step.component';
 import {MyAdDashboardComponent} from './my-ad-dashboard/my-ad-dashboard.component';
 import {CreateAdFirstStepComponent} from './create-ad/create-ad-first-step/create-ad-first-step.component';
+import { CreateAdComponent } from './create-ad/create-ad/create-ad.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatButtonModule} from '@angular/material/button';
 
 
 export const adRoutes: Routes = [
   {
     path: '',
+    component: CreateAdComponent
+  },
+  {
+    path: 'home',
     component: HomeComponent
+  },
 
-  },
-  {
-    path: 'firstStep',
-    component: CreateAdFirstStepComponent
-  },
-  {
-    path: 'secondStep',
-    component: CreateAdSecondStepComponent
-  },
-  {
-    path: 'thirdStep',
-    component: CreateAdThirdStepComponent
-  }
 ];
 
 @NgModule({
@@ -43,6 +38,7 @@ export const adRoutes: Routes = [
     CreateAdSecondStepComponent,
     CreateAdThirdStepComponent,
     MyAdDashboardComponent,
+    CreateAdComponent,
 
   ],
   imports: [
@@ -52,7 +48,9 @@ export const adRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
-    NgOptionHighlightModule
+    NgOptionHighlightModule,
+    MatStepperModule,
+    MatButtonModule
   ],
   exports: [HomeComponent]
 
