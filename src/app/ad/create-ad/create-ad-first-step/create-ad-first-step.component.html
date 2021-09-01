@@ -2,13 +2,14 @@
 
   <div [formGroup]="form">
 
-    <div class="row mb-2">
-      <div class="col-2 text-right"><label class="form-label"><b>Reparto</b></label></div>
-      <div class="col-10">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><b>Reparto</b></label>
+      <div class="col-sm-10">
         <ng-select
-          #select
+          #NgSelectReparto
           placeholder="Reparto"
           class="custom"
+          [loading]="isLoadingReparto"
           [items]="(allocations$ | async)"
           bindLabel="id"
           bindValue="id"
@@ -22,13 +23,14 @@
     </div>
 
 
-    <div class="row mb-2">
-      <div class="col-2 text-right"><label class="form-label"><b>Categoria</b></label></div>
-      <div class="col-10">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><b>Categoria</b></label>
+      <div class="col-sm-10">
         <ng-select
           placeholder="Categoria"
           formControlName="category"
           #NgSelectCategories
+          [loading]="isLoadingCategorie"
           bindLabel="name"
           bindValue="name"
           [items]="categories"
@@ -38,12 +40,13 @@
       </div>
     </div>
 
-    <div class="row mb-2">
+    <div class="form-group row">
 
-      <div class="col-2 text-right"><label class="form-label"><b>Marca</b></label></div>
-      <div class="col-10">
+      <label class="col-sm-2 col-form-label"><b>Marca</b></label>
+      <div class="col-sm-10">
         <ng-select [items]="(brands$ | async)"
                    [dropdownPosition]="'bottom'"
+                   [loading]="isLoadingMarca"
                    placeholder="Marca"
                    bindLabel="id"
                    bindValue="id"
@@ -54,30 +57,35 @@
     </div>
 
 
-    <div class="row mb-2">
+    <div class="form-group row">
 
-      <div class="col-2 text-right"><label class="form-label"><b>Modello</b></label></div>
-      <div class="col-10">
+      <label class="col-sm-2 col-form-label"><b>Modello</b></label>
+      <div class="col-sm-10">
         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Modello"
                formControlName="modello">
       </div>
 
     </div>
-    <div class="row mb-2">
-      <div class="col-2 text-right"><label for="exampleFormControlTextarea2" class="form-label"><b>Titolo
-        annuncio</b></label></div>
-      <div class="col-10">
-        <input type="text" class="form-control" id="exampleFormControlTextarea2"
+    <div class="form-group row">
+      <label for="exampleFormControlTextarea2" class="col-sm-2 col-form-label"><b>Titolo
+        annuncio</b></label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control is-valid" id="exampleFormControlTextarea2"
                placeholder="Titolo annuncio" formControlName="titolo"></div>
     </div>
-    <div class="row">
-      <div class="col-2 text-right"><label for="exampleFormControlTextarea1" class="form-label"><b>Testo
-        annuncio</b></label></div>
-      <div class="col-10">
+    <div class="form-group row">
+      <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label"><b>Testo
+        annuncio</b></label>
+      <div class="col-sm-10">
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
                   placeholder="Testo annuncio" formControlName="descrizione"></textarea></div>
     </div>
-
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Prezzo</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" id="inputEmail3" placeholder="Prezzo">
+      </div>
+    </div>
   </div>
 
 

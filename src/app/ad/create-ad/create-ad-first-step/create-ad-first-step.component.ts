@@ -5,7 +5,7 @@ import {Allocation} from '../../model/Allocation';
 import {Category} from '../../model/Category';
 import {FormBuilder, Validators} from '@angular/forms';
 import {AdService} from '../../services/ad.service';
-import {tap} from 'rxjs/operators';
+import {last, tap} from 'rxjs/operators';
 import {NgSelectComponent} from '@ng-select/ng-select';
 
 @Component({
@@ -37,6 +37,9 @@ export class CreateAdFirstStepComponent implements OnInit {
     titolo: [''],
     descrizione: ['']
   });
+  isLoadingReparto = true;
+  isLoadingCategorie = true;
+  isLoadingMarca = true;
 
   constructor(
     // private adReactiveService: AdReactiveService,
@@ -47,8 +50,10 @@ export class CreateAdFirstStepComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.brands$ = this.adService.fetchBrands();
-    this.allocations$ = this.adService.fetchAllocations().pipe(tap(console.log));
+    this.brands$ = this.adService.fetchBrands()
+      .pipe(last(() => this.isLoadingMarca = false));
+    this.allocations$ = this.adService.fetchAllocations()
+      .pipe(tap(console.log));
 
 
   }
